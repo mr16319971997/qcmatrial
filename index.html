@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="fontawsome/font-awesome.min.css" />
+  <script src="chart.js"></script>
+</head>
+
+<body>
+  <div class="content">
+    <header>
+      <nav class="fixed-top">
+        <div class="wrapper">
+          <div class="icon"><i id="left" class="">&lt</i></div>
+          <ul class="tabs-box">
+            <li class="tab active" id="defOpen" onclick="openPage('stresscalc','this')">
+              <img src="img/stresssblue.jpg" alt="" width="47px" height="47px"
+                style="border-radius: 50%; padding: 0; margin: 0" />
+              اجهاد الخرسانة
+            </li>
+
+            <li class="tab" id="defOpen" onclick="openPage('seive2','this')">
+              <img src="img/se2bl.jpg" alt="" width="47px" height="47px"
+                style="border-radius: 50%; padding: 0; margin: 0" />
+              تدرج سن 2
+            </li>
+            
+            <li class="tab" id="defOpen" onclick="openPage('seive1','this')">
+              <img src="img/se2bl.jpg" alt="" width="47px" height="47px"
+                style="border-radius: 50%; padding: 0; margin: 0" />
+              تدرج سن 1
+            </li>
+            <li class="tab" id="defOpen" onclick="openPage('seive0','this')">
+              <img src="img/se2bl.jpg" alt="" width="47px" height="47px"
+                style="border-radius: 50%; padding: 0; margin: 0" />
+              تدرج الرمل
+            </li>
+            <li class="tab" id="defOpen" onclick="openPage('most','this')">
+              <img src="img/mostbl.jpg" alt="" width="47px" height="47px"
+                style="border-radius: 50%; padding: 0; margin: 0" />
+              رطوبة الرمل
+            </li>
+            <li class="tab" id="defOpen" onclick="openPage('sweight','this')">
+              <img src="img/absbl.jpg" alt="" width="47px" height="47px"
+                style="border-radius: 50%; padding: 0; margin: 0" />
+              الوزن النوعي
+            </li>
+
+            </li>
+            <li class="tab" id="defOpen" onclick="openPage('la','this')">
+              <img src="img/la.jpg" alt="" width="47px" height="47px"
+                style="border-radius: 50%; padding: 0; margin: 0" />
+              لوس انجلوس
+            </li>
+            <li class="tab tab5" id="defOpen" onclick="openPage('crud','this')">
+              <img src="img/c ru.jpg" alt="" width="50px" height="47px"
+                style="border-radius: 50%; padding: 0; margin: 0" />
+              ادارة اعمال الخرسانة
+            </li>
+            <li class="tab tab5" id="defOpen" onclick="openPage('cone','this')">
+              <img src="img/sandcone.jpg" alt="" width="50px" height="47px"
+                style="border-radius: 50%; padding: 0; margin: 0" />
+              ساند كون
+            </li>
+            <li class="tab tab5" id="defOpen" onclick="openPage('sandrep','this')">
+              <img src="img/sandcone.jpg" alt="" width="50px" height="47px"
+                style="border-radius: 50%; padding: 0; margin: 0" />
+              ساند ربليسمنت
+            </li>
+            <li class="tab tab5" id="defOpen" onclick="openPage('proctTest','this')">
+              <img src="img/proc.jpg" alt="" width="50px" height="47px"
+                style="border-radius: 50%; padding: 0; margin: 0" />
+              بروكتور
+            </li>
+            <li class="tab tab5" id="defOpen" onclick="openPage('about','this')" style="padding: 0 10px;">
+              عن التطبيق
+            </li>
+          </ul>
+          <div class="icon"><i id="right" class="">&gt</i></div>
+        </div>
+      </nav>
+      <!-- <img src="img/wave.png" class="img-fluid fixed-top " alt="... "  style="z-index: 2;">
+      <div class="mb-3"> -->
+    </header>
+    <!-- start stress -->
+    <section class="container stress seive" id="stresscalc">
+      <div class="inputs">
+        <div class="input-group mb-0">
+          <select class="form-select" id="sample">
+            <option selected>اختر...</option>
+            <option value="cube1">مكعب 15*15</option>
+            <option value="cube2">مكعب 7*7</option>
+            <option value="cly">اسطوانة</option>
+          </select>
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control" id="stress" placeholder="اجهاد العنصر" required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control" id="load" placeholder="الحمل بالكيلونيوتن" required />
+        </div>
+        <div class="m">
+          <button type="submit" class="w-100 but" id="submit">احسب</button>
+        </div>
+      </div>
+      <div class="card outputs" style="background-color: #eef9ff">
+        <div class="card-body">
+          <img src="img/macbl.jpg" alt="" width="50px" height="50px" style="border-radius: 50%" />
+          <h3>الاجهاد</h3>
+          <div class="mb-1" id="kgf">....</div>
+          <h3>النسبة المئوية</h3>
+          <div class="mb-1" id="per">....</div>
+        </div>
+      </div>
+    </section>
+    <section class="container seive seive-1" id="seive2">
+      <table id="table2" style="max-height: 50px !important">
+        <thead>
+          <tr>
+            <input type="number" placeholder="وزن العينة بالجرام" id="wtsamp-2" />
+          </tr>
+          <tr style="height: 30px; margin: 10px">
+            <th scope="col">المناخل (مم)</th>
+            <th scope="col">محجوز تراكمي (جم)</th>
+            <th scope="col">محجوز (%)</th>
+            <th scope="col">مار (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">37.5</th>
+            <td><input type="number" class="wt-2" placeholder="...." /></td>
+            <td class="reserved-2">0.0%</td>
+            <td class="pass-2">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">25</th>
+            <td><input type="number" class="wt-2" placeholder="...." /></td>
+            <td class="reserved-2">0.0%</td>
+            <td class="pass-2">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">19</th>
+            <td><input type="number" class="wt-2" placeholder="...." /></td>
+            <td class="reserved-2">0.0%</td>
+            <td class="pass-2">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">12.5</th>
+            <td><input type="number" class="wt-2" placeholder="...." /></td>
+            <td class="reserved-2">0.0%</td>
+            <td class="pass-2">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">9.5</th>
+            <td><input type="number" class="wt-2" placeholder="...." /></td>
+            <td class="reserved-2">0.0%</td>
+            <td class="pass-2">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">4.75</th>
+            <td><input type="number" class="wt-2" placeholder="...." /></td>
+            <td class="reserved-2">0.0%</td>
+            <td class="pass-2">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">Pan</th>
+            <td><input type="number" class="wt-2" placeholder="...." /></td>
+          </tr>
+          <tr>
+            <th colspan="2">معامل النعومة &nbsp; &nbsp;&nbsp;=</th>
+            <td colspan="3" style="font-size: larger; font-size: 16px; padding: 0 40px" class="fm2">
+              ....
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="seive-btns">
+        <button class="reset-2 but">اعادة تعيين</button>
+        <button class="calc-2 but">احسب</button>
+      </div>
+
+      <div class="outputs">
+        <canvas id="line-chart2" width="100%" height="100%"></canvas>
+      </div>
+    </section>
+    <!-- end agg1 -->
+    <!-- start agg2 -->
+    <section class="container seive seive-1" id="seive1">
+      <table>
+        <thead>
+          <tr>
+            <input type="number" placeholder="وزن العينة بالجرام" id="wtsamp-1" />
+          </tr>
+          <tr style="height: 30px; margin: 10px">
+            <th scope="col">المناخل (مم)</th>
+            <th scope="col">محجوز تراكمي (جم)</th>
+            <th scope="col">محجوز (%)</th>
+            <th scope="col">مار (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">19</th>
+            <td><input type="number" class="wt-1" placeholder="...." /></td>
+            <td class="reserved-1">0.0%</td>
+            <td class="pass-1">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">12.5</th>
+            <td><input type="number" class="wt-1" placeholder="...." /></td>
+            <td class="reserved-1">0.0%</td>
+            <td class="pass-1">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">9.5</th>
+            <td><input type="number" class="wt-1" placeholder="...." /></td>
+            <td class="reserved-1">0.0%</td>
+            <td class="pass-1">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">4.75</th>
+            <td><input type="number" class="wt-1" placeholder="...." /></td>
+            <td class="reserved-1">0.0%</td>
+            <td class="pass-1">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">2.36</th>
+            <td><input type="number" class="wt-1" placeholder="...." /></td>
+            <td class="reserved-1">0.0%</td>
+            <td class="pass-1">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">Pan</th>
+            <td><input type="number" class="wt-2" placeholder="...." /></td>
+          </tr>
+          <tr>
+            <th colspan="2">معامل النعومة &nbsp; &nbsp;&nbsp;=</th>
+            <td colspan="3" style="font-size: larger; font-size: 16px; padding: 0 40px" class="fm1">
+              ....
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="seive-btns">
+        <button class="reset-1 but">اعادة تعيين</button>
+        <button class="calc-1 but">احسب</button>
+      </div>
+
+      <div class="outputs">
+        <canvas id="line-chart1" width="100%" height="100%"></canvas>
+      </div>
+    </section>
+
+    <!-- end seive 1 -->
+
+    <!-- start sand -->
+    <section class="container seive seive-0" id="seive0">
+      <table>
+        <thead>
+          <tr>
+            <input type="number" placeholder="وزن العينة بالجرام" id="wtsamp-0" />
+          </tr>
+          <tr style="height: 30px; margin: 10px">
+            <th scope="col">المناخل (مم)</th>
+            <th scope="col">محجوز تراكمي (جم)</th>
+            <th scope="col">محجوز (%)</th>
+            <th scope="col">مار (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">9.5</th>
+            <td><input type="number" class="wt-0" placeholder="...." /></td>
+            <td class="reserved-0">0.0%</td>
+            <td class="pass-0">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">4.75</th>
+            <td><input type="number" class="wt-0" placeholder="...." /></td>
+            <td class="reserved-0">0.0%</td>
+            <td class="pass-0">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">2.36</th>
+            <td><input type="number" class="wt-0" placeholder="...." /></td>
+            <td class="reserved-0">0.0%</td>
+            <td class="pass-0">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">1.18</th>
+            <td><input type="number" class="wt-0" placeholder="...." /></td>
+            <td class="reserved-0">0.0%</td>
+            <td class="pass-0">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">0.600</th>
+            <td><input type="number" class="wt-0" placeholder="...." /></td>
+            <td class="reserved-0">0.0%</td>
+            <td class="pass-0">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">0.300</th>
+            <td><input type="number" class="wt-0" placeholder="...." /></td>
+            <td class="reserved-0">0.0%</td>
+            <td class="pass-0">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">0.150</th>
+            <td><input type="number" class="wt-0" placeholder="...." /></td>
+            <td class="reserved-0">0.0%</td>
+            <td class="pass-0">0.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">Pan</th>
+            <td><input type="number" class="wt-2" placeholder="...." /></td>
+          </tr>
+          <tr>
+            <th colspan="2">معامل النعومة &nbsp; &nbsp;&nbsp;=</th>
+            <td colspan="3" style="font-size: larger; font-size: 16px; padding: 0 40px" class="fm0">
+              ....
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="seive-btns">
+        <button class="reset-0 but">اعادة تعيين</button>
+        <button class="calc-0 but">احسب</button>
+      </div>
+
+      <div class="outputs">
+        <canvas id="line-chart0" width="100%" height="100%"></canvas>
+      </div>
+    </section>
+    <!-- end seive 2 -->
+
+    <!-- end seive analysis-->
+
+    <!-- start most -->
+    <section class="container most seive" id="most">
+      <div class="inputs">
+        <div class="mb-0">
+          <input type="number" class="form-control" id="wsamp" placeholder=" وزن العينة رطبة" required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control" id="dsamp" placeholder="وزن العينة بعد التجفيف " required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control" id="swt" placeholder="كمية الرمل في الخلطة (كجم)" required />
+        </div>
+        <div class="m">
+          <button type="submit" class="w-100 but" id="wcCalc">احسب</button>
+        </div>
+      </div>
+      <div class="card outputs" style="background-color: #eef9ff">
+        <div class="card-body">
+          <img src="img/mostbl.jpg" alt="" width="50px" height="50px" style="border-radius: 50%" />
+
+          <h3>محتوى الرطوبة</h3>
+          <div class="mb-1" id="wc">....</div>
+
+          <h3>كمية الميه اللي هقللها</h3>
+          <div class="mb-1" id="wd">....</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- end most -->
+
+
+    <!-- start la -->
+    <section class="container la seive" id="la">
+      <div class="inputs">
+        <div class="mb-0">
+          <input type="number" class="form-control" id="wt12" placeholder="وزن المحجوز على منخل 12" required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control" id="mainwt" placeholder="وزن العينة الأصلي" required />
+        </div>
+
+        <div class="m">
+          <button type="submit" class="w-100 but" id="laCalc">احسب</button>
+        </div>
+      </div>
+      <div class="card outputs" style="background-color: #eef9ff">
+        <div class="card-body">
+          <img src="img/la.jpg" alt="" width="50px" height="50px" style="border-radius: 50%" />
+          <div class="mb-3"></div>
+          <h3>نسبة الفاقد</h3>
+          <div class="mb-1" id="lost">....</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- end most -->
+
+
+    <!-- start s-weight -->
+    <section class="container sweight seive" id="sweight">
+      <div class="inputs">
+        <div class="mb-0">
+          <input type="number" class="form-control" id="h" placeholder="وزن العينة الأصلي قبل بدء التجربة" required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control" id="b" placeholder="الون المشبع جاف السطح" required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control" id="g" placeholder="وزن العينة مغمورة ف الماء السلة" required />
+          <input type="number" class="form-control" id="a" placeholder="وزن العينة جافة بعد انتهاء التجربة" required />
+        </div>
+        <div class="mb-"></div>
+        <div class="m">
+          <button type="submit" class="w-100 but" id="swCalc">احسب</button>
+        </div>
+      </div>
+      <div class="card outputs" style="background-color: #eef9ff">
+        <div class="card-body">
+          <img src="img/absbl.jpg" alt="" width="50px" height="50px" style="border-radius: 50%" />
+
+          <h6>الوزن النوعي الكلي</h6>
+          <div class="mb-0 .gr" id="allsw">....</div>
+          <h6>الوزن النوعي الظاهري</h6>
+          <div class="mb-0 .gr" id="apsw">....</div>
+          <h6>الوزن النوعي مشبع جاف السطح</h6>
+          <div class="mb-0 .gr" id="dsw">....</div>
+          <h6>النسبة المئوية للامتصاص</h6>
+          <div class="mb-0 .gr" id="abs">....</div>
+        </div>
+      </div>
+    </section>
+    <section class="container most seive" id="most">
+      <div class="inputs">
+        <div class="mb-0">
+          <input type="number" class="form-control" id="wsamp" placeholder=" وزن العينة رطبة" required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control" id="dsamp" placeholder="وزن العينة بعد التجفيف " required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control" id="swt" placeholder="كمية الرمل في الخلطة (كجم)" required />
+        </div>
+        <div class="m">
+          <button type="submit" class="w-100 but" id="wcCalc">احسب</button>
+        </div>
+      </div>
+      <div class="card outputs" style="background-color: #eef9ff">
+        <div class="card-body">
+          <img src="img/mostbl.jpg" alt="" width="50px" height="50px" style="border-radius: 50%" />
+
+          <h3>محتوى الرطوبة</h3>
+          <div class="mb-1" id="wc">....</div>
+
+          <h3>كمية الميه اللي هقللها</h3>
+          <div class="mb-1" id="wd">....</div>
+        </div>
+      </div>
+    </section>
+    <section class="container cone seive cone-input" id="cone">
+      <div class="inputs">
+        <div class="mb-0">
+          <input type="number" class="form-control" id="wtbe4" placeholder="وزن الجهاز + الرمل قبل التجربة" required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control" id="wtafter" placeholder="وزن الجهاز + الرمل بعد التجربة"
+            required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control" id="wtsample" placeholder="وزن العينة" required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control" id="wtsand" placeholder="وزن الرمل الذي يملأ المخروط" required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control" id="waterc" placeholder="محتوى الرطوبة %" required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control" id="maxden" placeholder="أقصى كثافة جافة" required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control" id="sandden" placeholder="كثافة الرمل" required />
+        </div>
+        <div class="seive-btns">
+          <button id="sconereset">اعادة تعيين</button>
+          <button id="sconecalc">احسب</button>
+        </div>
+        
+
+
+      </div>
+      <div class="card outputs" style="background-color: #eef9ff">
+        <div class="card-body">
+          <img src="img/sandcone.jpg" alt="" width="50px" height="50px" style="border-radius: 50%" />
+
+          <h3>معدل الدمك</h3>
+          <div class="mb-1" id="sandcone">....</div>
+
+
+        </div>
+      </div>
+    </section>
+
+    <!--start proctor -->
+    <section class="container seive proctTest" id="proctTest">
+      <table>
+        <thead>
+          <tr style="background-color: #003e87; color: #e9e5e5;border: 1px solid white;border-radius: 10px !important;">
+            <th scope="col">Can No</th>
+            <th scope="col">1</th>
+            <th scope="col">2</th>
+            <th scope="col">3</th>
+            <th scope="col">4</th>
+            <th scope="col">5</th>
+          </tr>
+          <tr>
+            <th scope="row"> التربة رطبة + العلبة (gms)</th>
+            <td><input type="number" class="canwetsoil" placeholder="...." /></td>
+            <td><input type="number" class="canwetsoil" placeholder="...." /></td>
+            <td><input type="number" class="canwetsoil" placeholder="...." /></td>
+            <td><input type="number" class="canwetsoil" placeholder="...." /></td>
+            <td><input type="number" class="canwetsoil" placeholder="...." /></td>
+          </tr>
+          <tr>
+            <th scope="row">التربة جافة + العلبة (gms)</th>
+            <td><input type="number" class="candrysoil" placeholder="...." /></td>
+            <td><input type="number" class="candrysoil" placeholder="...." /></td>
+            <td><input type="number" class="candrysoil" placeholder="...." /></td>
+            <td><input type="number" class="candrysoil" placeholder="...." /></td>
+            <td><input type="number" class="candrysoil" placeholder="...." /></td>
+          </tr>
+          <tr>
+            <th scope="row"> العلبة (gms)</th>
+            <td><input type="number" class="wtofcan" placeholder="...." /></td>
+            <td><input type="number" class="wtofcan" placeholder="...." /></td>
+            <td><input type="number" class="wtofcan" placeholder="...." /></td>
+            <td><input type="number" class="wtofcan" placeholder="...." /></td>
+            <td><input type="number" class="wtofcan" placeholder="...." /></td>
+          </tr>
+          <tr>
+            <th scope="row"> محتوى المياه (gms)</th>
+            <td class="moisture">...</td>
+            <td class="moisture">...</td>
+            <td class="moisture">...</td>
+            <td class="moisture">...</td>
+            <td class="moisture">...</td>
+          </tr>
+          <tr>
+            <th scope="row">التربة جافة(gms)</th>
+            <td class="wtofdrysoil">...</td>
+            <td class="wtofdrysoil">...</td>
+            <td class="wtofdrysoil">...</td>
+            <td class="wtofdrysoil">...</td>
+            <td class="wtofdrysoil">...</td>
+          </tr>
+          <tr>
+            <th scope="row">محتوى الرطوبة %</th>
+            <td class="moisturecont">...</td>
+            <td class="moisturecont">...</td>
+            <td class="moisturecont">...</td>
+            <td class="moisturecont">...</td>
+            <td class="moisturecont">...</td>
+          </tr>
+          <tr style="background-color: #003e87; color: #fff; border: 1px solid white;">
+            <th scope="col">Deter No</th>
+            <th scope="col">1</th>
+            <th scope="col">2</th>
+            <th scope="col">3</th>
+            <th scope="col">4</th>
+            <th scope="col">5</th>
+
+          </tr>
+          <tr>
+            <td colspan="3">
+              <input type="number" placeholder="  وزن القالب (gms)" id="moldweight" />
+            </td>
+            <td colspan="3">
+              <input type="number" placeholder=" حجم القالب (cm3)" id="moldvolume" />
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">التربة رطبة+ القالب (gms)</th>
+            <td><input type="number" class="wtsampmold" placeholder="...." /></td>
+            <td><input type="number" class="wtsampmold" placeholder="...." /></td>
+            <td><input type="number" class="wtsampmold" placeholder="...." /></td>
+            <td><input type="number" class="wtsampmold" placeholder="...." /></td>
+            <td><input type="number" class="wtsampmold" placeholder="...." /></td>
+
+          </tr>
+          <tr>
+            <th scope="row">التربة رطبة (gms)</th>
+            <td class="wtwetsampl">...</td>
+            <td class="wtwetsampl">...</td>
+            <td class="wtwetsampl">...</td>
+            <td class="wtwetsampl">...</td>
+            <td class="wtwetsampl">...</td>
+          </tr>
+          <tr>
+            <th scope="row">الكثافة الرطبة (gm/cm3)</th>
+            <td class="wetunitwt">...</td>
+            <td class="wetunitwt">...</td>
+            <td class="wetunitwt">...</td>
+            <td class="wetunitwt">...</td>
+            <td class="wetunitwt">...</td>
+          </tr>
+          <tr>
+            <th scope="row">الكثافةالجافة (gm/cm3)</th>
+            <td class="dryunitwt">...</td>
+            <td class="dryunitwt">...</td>
+            <td class="dryunitwt">...</td>
+            <td class="dryunitwt">...</td>
+            <td class="dryunitwt">...</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="seive-btns">
+        <button class="reset-proctor but">اعادة تعيين</button>
+        <button class="calc-proctor but">احسب</button>
+      </div>
+
+      <div class="outputs">
+
+        <canvas id="line-chartpro" width="100%" height="100%"></canvas>
+    </section>
+    <!-- end proctor -->
+
+
+
+    <!-- start sand replacement -->
+    <section class="container seive sandrep" id="sandrep">
+      <div class="inputs">
+        <div class="mb-0">
+          <input type="number" class="form-control e16" id="wtbe4" placeholder=" الوزن الكلي للعينة " required />
+        </div>
+
+        <div class="mb-0">
+          <input type="number" class="form-control e20" id="wtbe4" placeholder="وزن المحجوز على منخل 3/4 " required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control e22" id="wtbe4" placeholder="وزن المحجوز على منخل 3/4 جاف"
+            required />
+        </div>
+
+        <div class="mb-0">
+          <input type="number" class="form-control e23" id="wtbe4" placeholder=" وزن المار من  منخل 3/4 جاف "
+            required />
+        </div>
+
+        <div class="mb-0">
+          <input type="number" class="form-control e25" id="wtbe4" placeholder="وزن الرمل في الحفرة + البلتة	"
+            required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control e26" id="wtbe4" placeholder="وزن معايرة البلتة " required />
+        </div>
+
+        <div class="mb-0">
+          <input type="number" class="form-control e28" id="wtsample" placeholder=" كثافة الرمل	" required />
+        </div>
+        <div class="mb-0">
+          <input type="number" class="form-control e30" id="wtsand"
+            placeholder=" الوزن النوعي للمواد المحجوزه علي منخل 3/4	" required />
+        </div>
+
+        <div class="mb-2">
+          <input type="number" class="form-control e35" id="sandden" placeholder="البروكتور" required />
+        </div>
+
+        <div class="seive-btns">
+          <button id="reset-sandrep">اعادة تعيين</button>
+          <button id="calc-sandrep">احسب</button>
+        </div>
+
+      </div>
+      <div class="card outputs" style="background-color: #eef9ff">
+        <div class="card-body">
+          <h3>معدل الدمك</h3>
+          <div class="m" id="sandrepshow">....</div>
+
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- end sand replacement -->
+  </div>
+
+  <!-- start about  -->
+  <section class="container stress seive" id="about">
+
+
+    <div class="card outputsss" style="background-color: #fff">
+      <div class="card-body">
+
+        <div style="background-color:rgb(80, 62, 247);border-radius: 10px;color:#FFF;margin: 10px 0;padding: 10px 0;">تم برمجة
+           التطبيق بواسطة </div>
+
+        <div style="border-radius: 10px;padding: 10px 0;text-align: justify;">
+
+          <h5 class="mb-1 " id="kgf" style="font-weight: bold;color: rgb(20, 19, 19);">محمود رمضان محمد</h5>
+          <p class="mb-1" style="color: rgb(43, 42, 42);">مهندس ضبط جودة (خرسانة - تربة - أسفلت)</p>
+
+        </div>
+
+        <div style="background-color:rgb(80, 62, 247);border-radius: 10px;color:#FFF;margin: 10px 0;padding: 10px 0;">للتواصل
+        </div>
+        <div style="display: flex; justify-content: space-between; margin: 20px 0;">
+          <a href="https://www.linkedin.com/in/mahmoud-ramadan-163m1997" style="color: black;">
+
+            <i class="fa fa-linkedin larger" aria-hidden="true" style="font-size: 25px; color:rgb(80, 62, 247)"></i>
+          
+          </a>
+          <a href="
+            https://www.facebook.com/mr163311?mibextid=ZbWKwL" style="color: black;">
+
+            <i class="fa fa-facebook" aria-hidden="true" style="font-size: 25px; color:rgb(80, 62, 247)"></i>
+            
+          </a>
+          <a href="https://wa.me/+201149219701" style="color: black;">
+
+            <i class="fa fa-whatsapp" aria-hidden="true" style="font-size: 25px; color:blue"></i>
+            
+          </a>
+        </div>
+
+      </div>
+
+  </section>
+  <!-- end about -->
+  <div class="crud" id="crud">
+    <div class="inputss container">
+      <input type="date" name="التاريخ" id="date" placeholder="التاريخ" />
+      <input type="text" name="name" id="name" placeholder="اسم العنصر " />
+      <input type="text" name="site1" id="site1" placeholder="الموقع" />
+
+      <input type="number" name="cubes" id="cubes" placeholder="عدد المكعبات" />
+      <input type="number" name="str" id="str" placeholder="الاجهاد" />
+
+      <input type="number" name="vol" id="vol" placeholder="كمية الخرسانة " />
+
+      <button type="submit" id="add">اضافة</button>
+    </div>
+
+    <div class="searchblock container">
+      <div class="btnsearch">
+        <button onclick="getSearchMood(this.id) " id="searchName">
+          بحث بالاسم
+        </button>
+        <input class="" onkeyup="searchData(this.value)" type="text" name="search" id="search" placeholder="بحث" />
+        <button onclick="getSearchMood(this.id)" id="searchSite">
+          بحث بالموقع
+        </button>
+      </div>
+      <div id="delall"></div>
+    </div>
+    <div class="card outputss">
+      <table class="table">
+        <thead>
+          <tr class="h">
+            <th>التاريخ</th>
+            <th>العنصر</th>
+            <th>الموقع</th>
+            <th>المكعبات</th>
+            <th>الاجهاد</th>
+            <th>الكمية</th>
+
+            <th>تعديل</th>
+            <th>حذف</th>
+            <th>7أيام</th>
+            <th>28 يوم</th>
+          </tr>
+        </thead>
+
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+  <div class="footer fixed-bottom" style="height: 70px; background-color: #fff; width: 100%">
+
+    <a href="#stresscalc">
+      <img src="img/home.jpg" alt="" width="35px" height="35px" style="border-radius: 50%" />
+    </a>
+    <a href="#index">
+      <img src="img/more.jpg" alt="" width="35px" height="35px" style="border-radius: 50%" />
+    </a>
+    <a href="https://wa.me/+201149219701">
+      <img src="img/whars.jpg" alt="" width="35px" height="35px" style="border-radius: 50%" />
+    </a>
+  </div>
+
+  <!-- end s-weight -->
+
+  <!-- <div style="font-size: small;"><a href="#">©Mahmoud Ramadan</a></div> -->
+
+  <script src="/js/bootstrap.bundle.js"></script>
+  <script src="main.js"></script>
+  <script src="script.js"></script>
+  <script src="myChart.js"></script>
+</body>
+
+</html>
